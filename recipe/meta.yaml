@@ -1,26 +1,27 @@
 {% set name = "fastapi-admin" %}
 {% set version = "1.0.4" %}
+{% set python_min = "3.7" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fastapi-admin-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/fastapi-admin-{{ version }}.tar.gz
   sha256: d45cb23a23fc2bbffb0e8adfb1362350a1fe808f47912253c1f067f7d7745d88
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - poetry-core >=1.0.0
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - babel 
     - aiofiles 
     - aioredis 
@@ -39,6 +40,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/fastapi-admin/fastapi-admin
